@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration SYSTEM
+"C:/Users/kalai/Downloads/hibernate-configuration-3.0.dtd">
+		 
+<hibernate-configuration>
+	<session-factory>
+		<!-- SQL Dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		
+		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/employee</property>
+		<property name="hibernate.connection.username">newuser1</property>
+		<property name="hibernate.connection.password">123456789@Kd</property>
+		
+		<property name="current_session_context_class"> thread</property>
+		
+		<property  name="hibernate.show_sql">true</property>
+		<property name="hbm2ddl.auto">update</property>
+	</session-factory>		
+		</hibernate-configuration>
+		

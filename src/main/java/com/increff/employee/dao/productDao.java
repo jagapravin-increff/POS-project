@@ -21,7 +21,7 @@ import com.increff.employee.service.ApiException;
 
 		private static String delete_id = "delete from productPojo p where p.product_id=:product_id";
 		private static String select_id = "select new com.increff.employee.model.productDTO(pc.name, pc.barcode,pc.mrp,p.id, pc.product_id) from productPojo pc join pc.brand p where pc.product_id=:id";
-		private static String update_prod = "update productPojo set name=:name, barcode=:barcode,brand=:brand,mrp=:mrp";
+		private static String update_prod = "update productPojo set name=:name, barcode=:barcode,brand=:brand,mrp=:mrp where product_id=:id";
 		private static String select_all = "select new com.increff.employee.model.productDTO(pc.name, pc.barcode,pc.mrp,p.id, pc.product_id) from productPojo pc join pc.brand p";
 		
 		
@@ -72,6 +72,7 @@ import com.increff.employee.service.ApiException;
 			//brandPojo b = em().getReference(brandPojo.class, id);
 			try {
 			Query query = getQuery(update_prod);
+			query.setParameter("id",id);
 			query.setParameter("name", p.getName());
 			query.setParameter("barcode", p.getBarcode());
 			query.setParameter("brand", p.getBrand());

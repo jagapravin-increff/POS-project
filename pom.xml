@@ -12,7 +12,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<!-- Maven configuration -->
+		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -32,7 +32,7 @@
 
 		<!-- Jetty configuration -->
 		<jetty.version>9.4.21.v20190926</jetty.version>
-		<jetty.http.port>9000</jetty.http.port>
+		<jetty.http.port>9090</jetty.http.port>
 		<jetty.context>/employee</jetty.context>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 

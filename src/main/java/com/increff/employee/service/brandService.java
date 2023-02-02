@@ -43,6 +43,11 @@ public class brandService {
 		logger.info(id);
 		return getCheck(id);
 	}
+	
+	@Transactional(rollbackOn = ApiException.class)
+	public List<brandPojo> getbrand(String brand) throws ApiException {
+		return dao.getbrand(brand);
+	}
 
 	@Transactional
 	public List<brandPojo> getAll() {
@@ -75,6 +80,8 @@ public class brandService {
 		}
 		return;
 	}
+	
+	
 
 	protected static void normalize(brandPojo p) {
 		p.setBrand(StringUtil.toLowerCase(p.getBrand()));

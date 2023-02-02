@@ -4,6 +4,11 @@ function getproductUrl(){
 	return baseUrl + "/api/product";
 }
 
+function getbrandUrl(){
+	var baseUrl = $("meta[name=baseUrl]").attr("content")
+	return baseUrl + "/api/brand";
+}
+
 //BUTTON ACTIONS
 function addproduct(event){
 	//Set the values to update
@@ -57,6 +62,28 @@ function updateproduct(event){
 	return false;
 }
 
+function getbrandList(){
+	var url = getbrandUrl();
+	console.log(url);
+	$.ajax({
+	   url: url,
+	   type: 'GET',
+	   success: function(data) {
+  var str = ""
+  for (var item of data) {
+    str += "<option>" +item["brand"]  + "-"+ item["category"]  + "</option>"
+  }
+  document.getElementById("inputBrandCategory").innerHTML = str;
+    document.getElementById("inputBrandCategorymodal").innerHTML = str;
+    getproductList();
+	   },
+	   error: handleAjaxError
+	});
+}
+
+
+
+
 
 function getproductList(){
 	var url = getproductUrl();
@@ -64,7 +91,8 @@ function getproductList(){
 	   url: url,
 	   type: 'GET',
 	   success: function(data) {
-	   		displayproductList(data);  
+	   
+	   		displayproductList(data);
 	   },
 	   error: handleAjaxError
 	});
@@ -145,16 +173,15 @@ function displayproductList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		console.log("hello");
+
 		console.log(e);
 		var buttonHtml = '<button onclick="deleteproduct(' + e.product_id + ')">delete</button>'
 		buttonHtml += ' <button onclick="displayEditproduct(' + e.product_id + ')">edit</button>'
 		var row = '<tr>'
-		+ '<td>' + e.product_id + '</td>'
 		+ '<td>' + e.name + '</td>'
 		+ '<td>'  + e.barcode + '</td>'
 		+ '<td>'  + e.mrp + '</td>'
-        + '<td>'  +e.brand_id+'</td'
+        + '<td>'  +e.brand_category+'</td>'
 		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
         $tbody.append(row);
@@ -168,6 +195,7 @@ function displayEditproduct(product_id){
 	   url: url,
 	   type: 'GET',
 	   success: function(data) {
+	   console.log(data);
 	   		displayproduct(data);   
 	   },
 	   error: handleAjaxError
@@ -209,6 +237,7 @@ function displayproduct(data){
 	$("#product-edit-form input[name=barcode]").val(data.barcode);	
 	$("#product-edit-form input[name=brand_id]").val(data.brand_id);	
 	$("#product-edit-form input[name=mrp]").val(data.mrp);	
+	$("#product-edit-form select[name=brand_category]").val(data.brand_category)
 	$("#product-edit-form input[name=product_id]").val(data.product_id);	
 
 	$('#edit-product-modal').modal('toggle');
@@ -226,6 +255,14 @@ function init(){
     $('#productFile').on('change', updateFileName)
 }
 
+$(document).ready(function(){
+   $(".active").removeClass("active");
+   $("#product-nav").addClass("active");
+});
+
 $(document).ready(init);
-$(document).ready(getproductList);
+$(document).ready(getbrandList);
+
+
+
 

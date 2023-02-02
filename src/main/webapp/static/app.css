@@ -21,3 +21,35 @@ body {
 .fas{
     font-size: 4rem;
 }
+
+
+.navbar .navbar-nav .nav-link:hover{
+    background-color: #567189;
+    color: white;
+  }  
+ .nav-item.active a{
+     background-color: #567189;
+    color: white;
+  }
+  
+  
+.navbar .navbar-nav .nav-link {
+  padding: 0.6em;
+  transition: all 0.5s;
+}
+.navbar .navbar-brand {
+  padding: 0 0.6em;
+
+  font-weight: bold;
+}
+@media only screen and (min-width: 992px) {
+  .navbar {
+    padding: 0;
+  }
+  .navbar .navbar-nav .nav-link {
+    padding: 1em 0.7em;
+  }
+  .navbar .navbar-brand {
+    padding: 0 0.8em;
+  }
+}

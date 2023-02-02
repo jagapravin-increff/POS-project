@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.increff.employee.dao.productDao;
-import com.increff.employee.model.productDTO;
-import com.increff.employee.pojo.brandPojo;
 import com.increff.employee.pojo.productPojo;
 import com.increff.employee.util.StringUtil;
 
@@ -44,14 +42,21 @@ public class productService {
 	}
 
 	@Transactional(rollbackOn = ApiException.class)
-	public productDTO get(int id) throws ApiException {
+	public productPojo get(int id) throws ApiException {
 		return getCheck(id);
 	}
 
 	@Transactional
-	public List<productDTO> getAll() throws Exception {
+	public List<productPojo> getAll() throws Exception {
 		return dao.selectAll();
 	}
+	
+	@Transactional
+	public List<productPojo> get(String brand)  throws ApiException{
+		// TODO Auto-generated method stub
+		return dao.selectAll(brand);
+	}
+	
 
 	@Transactional(rollbackOn  = ApiException.class)
 	public void update(int id, productPojo p) throws ApiException {
@@ -60,19 +65,15 @@ public class productService {
 	}
 
 	@Transactional
-	public productDTO getCheck(int id) throws ApiException {
-		productDTO p = dao.select(id);
+	public productPojo getCheck(int id) throws ApiException {
+		productPojo p = dao.select(id);
 		if (p == null) {
 			throw new ApiException("Product with given ID does not exit, id: " + id);
 		}
 		return p;
 	}
 	
-	public brandPojo ref(int id) {
-		return dao.findid(id);
-	}
 	
-
 	protected static void normalize(productPojo p) {
 		p.setName(StringUtil.toLowerCase(p.getName()));
 		p.setBarcode(StringUtil.toLowerCase(p.getBarcode()));

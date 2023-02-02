@@ -6,7 +6,7 @@
 
 <body>
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
-
+<link rel="stylesheet" th:href="@{/static/inventory.css}">
 <div class="container">
 
 <h3>Inventory</h3>
@@ -16,9 +16,17 @@
 	 <div class="col-12">
 			<form class="form-inline" id="inventory-form">
 			  <div class="form-group">
-			    <label for="inputproductid" class="col-sm-2 col-form-label">Product Id</label>
+			    <label for="inputproductid" class="col-sm-2 col-form-label">Brand</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="id" id="inputid" placeholder="enter product id">
+			      <select id="inputBrandCategory" name="brand">
+			      </select>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputproductid" class="col-sm-2 col-form-label">Item</label>
+			    <div class="col-sm-10">
+			      <select id="inputItem" name="item">
+			      </select>
 			    </div>
 			  </div>
 			  <div class="form-group">
@@ -43,11 +51,14 @@
 
  <!-- Table -->
  <div class="col-12">
-	<table class="table table-striped" id="inventory-table">
+	<table class="content-table" id="inventory-table">
 	  <thead>
 	    <tr>
-	      <th scope="col">Product ID</th>
+	    
+	      <th scope="col">Brand-Category</th>
+	      <th scope="col">Item</th>
 	      <th scope="col">Quantity</th>
+	      <th scope="col">Action</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -65,26 +76,31 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Edit inventory</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+
       </div>
       <div class="modal-body">
 			<form class="form-inline" id="inventory-edit-form">
-				<div class="form-group">
-			    <label for="inputproductid" class="col-sm-2 col-form-label">Product ID</label>
+			  <div class="form-group">
+			    <label for="inputproductid" class="col-sm-2 col-form-label">Brand</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="productid" placeholder="enter Product Id">
+
+			       <input type="text" class="form-control" name="brand" id="inputBrandCategorymodal" readonly>
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="inputquantity" class="col-sm-2 col-form-label">category</label>
+			    <label for="inputproductid" class="col-sm-2 col-form-label">Item</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="quantity" placeholder="enter quantity">
+			       <input type="text" class="form-control" name="item" id="inputItemmodal" readonly>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputquantity" class="col-sm-2 col-form-label">Quantity</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" name="quantity" id="inputQuantity" placeholder="enter Quantity">
 			    </div>
 			  </div>
 			  
- 	        <input type="hidden" name="id" >
+ 	        <input type="hidden" name="id_hidden" >
 			</form>        
       </div>
       <div class="modal-footer">
@@ -103,9 +119,7 @@
       
       <div class="modal-header">
         <h5 class="modal-title">Upload inventory</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+
       </div>
       
       <div class="modal-body">

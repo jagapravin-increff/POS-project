@@ -6,7 +6,7 @@
 
 <body>
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
-
+<link rel="stylesheet" th:href="@{/static/product.css}">
 <div class="container">
 
 <h3>Product</h3>
@@ -23,16 +23,17 @@
 			  </div> <!--input name-->
 
 			  <div class="form-group">
-			    <label for="inputBarcode" class="col-sm-2 col-form-label">Bar Code</label>
+			    <label for="inputBarcode" class="col-sm-2 col-form-label">BarCode</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="enter Barcode">
 			    </div>
 			  </div><!--input barcode-->
 
 			  <div class="form-group">
-			    <label for="inputBrandid" class="col-sm-2 col-form-label">Brand id</label>
+			    <label for="inputBrandid" class="col-sm-2 col-form-label">Brand</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="id" id="inputBrandid" placeholder="enter Brand-id">
+			      <select id="inputBrandCategory" name="brand_category">
+			      </select>
 			    </div>
 			  </div><!--input brand-id-->
 
@@ -58,14 +59,14 @@
 
  <!-- Table -->
  <div class="col-12">
-	<table class="table table-striped" id="product-table">
+	<table class="content-table" id="product-table">
 	  <thead>
 	    <tr>
-	      <th scope="col">ID</th>
 	      <th scope="col">Name</th>
 	      <th scope="col">Bar Code</th>
 	      <th scope="col">MRP</th>
-	      <th scope="col">Brand id</th>
+	      <th scope="col">Brand Category</th>
+	      <th scope="col">Action</th>
 	    </tr>
 	  </thead>
 	  <tbody></tbody>
@@ -80,9 +81,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Edit product</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+
       </div>
       <div class="modal-body">
 			<form class="form-inline" id="product-edit-form">
@@ -99,9 +98,10 @@
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="inputBrandid" class="col-sm-2 col-form-label">Brand id</label>
+			    <label for="inputBrandid" class="col-sm-2 col-form-label">Brand</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="brand_id" placeholder="enter Brand-id">
+			     <select id="inputBrandCategorymodal" name="brand_category">
+			      </select>
 			    </div>
 			  </div><!--input brand-id-->
 
@@ -130,9 +130,7 @@
       
       <div class="modal-header">
         <h5 class="modal-title">Upload brand</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+
       </div>
       
       <div class="modal-body">

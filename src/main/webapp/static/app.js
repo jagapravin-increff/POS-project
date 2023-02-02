@@ -1,4 +1,3 @@
-
 //HELPER METHOD
 function toJson($form){
     var serialized = $form.serializeArray();
@@ -9,6 +8,17 @@ function toJson($form){
     }
     var json = JSON.stringify(data);
     return json;
+}
+
+
+function toJsonobject($form){
+    var serialized = $form.serializeArray();
+    var s = '';
+    var data1 = {};
+    for(s in serialized){
+        data1[serialized[s]['name']] = serialized[s]['value']
+    }
+    return data1;
 }
 
 

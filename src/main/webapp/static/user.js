@@ -77,6 +77,10 @@ function init(){
 	$('#add-user').click(addUser);
 	$('#refresh-data').click(getUserList);
 }
+$(document).ready(function(){
+   $(".active").removeClass("active");
+   $("#admin-nav").addClass("active");
+});
 
 $(document).ready(init);
 $(document).ready(getUserList);

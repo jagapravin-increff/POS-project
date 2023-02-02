@@ -12,9 +12,12 @@ import javax.persistence.OneToOne;
 public class inventoryPojo {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	private  String brand;
+	private  String item;
 	private int quantity;
-
+ 
 	
 	public int getId() {
 		return id;
@@ -37,6 +40,26 @@ public class inventoryPojo {
 		this.quantity = quantity;
 	}
 	public inventoryPojo() {
+	}
+
+
+	public String getItem() {
+		return item;
+	}
+
+
+	public void setItem(String item) {
+		this.item = item;
+	}
+
+
+	public String getBrand() {
+		return brand;
+	}
+
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 }

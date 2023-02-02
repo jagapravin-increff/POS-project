@@ -1,4 +1,5 @@
 
+
 function getEmployeeUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/employee";
@@ -215,6 +216,12 @@ function init(){
 	$('#download-errors').click(downloadErrors);
     $('#employeeFile').on('change', updateFileName)
 }
+
+$(document).ready(function(){
+   $(".active").removeClass("active");
+   $("#emp-nav").addClass("active");
+});
+
 
 $(document).ready(init);
 $(document).ready(getEmployeeList);

@@ -25,18 +25,27 @@ public class InventoryService {
 		if(p.getQuantity()==0) {
 			throw new ApiException("Quantity cannot be empty");
 		}
-		if(p.getId()==0) {
-			throw new ApiException("Quantity cannot be empty");
+
+		int quantity[]=insert_check(p.getBrand(),p.getItem());
+		if(quantity[0]!=0)
+		{
+			p.setQuantity(p.getQuantity()+quantity[0]);
+			p.setId(quantity[1]);
+			dao.update(p.getId(),p);
 		}
-		invcheck(p.getId());
-		dao.insert(p);
+		else
+		{
+			dao.insert(p);
+		}
+
 	}
 
 
 	@Transactional(rollbackOn = ApiException.class)
 	public inventoryPojo get(int id) throws ApiException {
-		return getCheck(id);
+		return dao.select(id);
 	}
+	
 
 	@Transactional
 	public List<inventoryPojo> getAll() throws Exception {
@@ -45,20 +54,8 @@ public class InventoryService {
 
 	@Transactional(rollbackOn  = ApiException.class)
 	public void update(int id, inventoryPojo p) throws ApiException {
-		updcheck(id);
 		dao.update(id,p);
 	}
-      @Transactional
-	public void updcheck(int id) throws ApiException {
-		// TODO Auto-generated method stub
-    	  productPojo pr=dao.findid(id);
-		  if (pr==null) {
-				logger.info("delete_id");
-				throw new ApiException("Product with given Product ID does not exit, id: "+ id);
-			}
-		
-	}
-
 
 	@Transactional
 	public inventoryPojo getCheck(int id) throws ApiException {
@@ -81,6 +78,27 @@ public class InventoryService {
 			throw new ApiException("Inventory details for the given Product ID already exists");
 		}
 	}
+	
+	@Transactional
+	public int[] insert_check(String brand,String name) 
+	{
+		inventoryPojo pr=dao.check(brand, name);
+		int[] ans = new int[2];
+		if(pr!=null)
+		{  
+        ans[0] = pr.getQuantity();
+        ans[1] = pr.getId();
+			
+		}
+		else
+		{
+			ans[0]=0;
+			ans[1]=0;
+		}
+		return ans;
+	}
+
+
 	
 	
 	

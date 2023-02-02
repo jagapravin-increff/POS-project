@@ -7,18 +7,11 @@ public class productForm {
 	private String barcode;
 	private int id;
 	private double mrp;
-	private int brand_id;
+	private String brand_category;
 	public String getName() {
 		return name;
 	}
 	
-	public int getBrand_id() {
-		return brand_id;
-	}
-
-	public void setBrand_id(int brand_id) {
-		this.brand_id = brand_id;
-	}
 
 	public void setName(String name) {
 		this.name = name;
@@ -41,6 +34,14 @@ public class productForm {
 	}
 	public void setMrp(double mrp) {
 		this.mrp = mrp;
+	}
+
+	public String getBrand_category() {
+		return brand_category;
+	}
+
+	public void setBrand_category(String brand_category) {
+		this.brand_category = brand_category;
 	}
 
 

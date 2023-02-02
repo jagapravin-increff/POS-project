@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.increff.employee.dto.inventoryDto;
+import com.increff.employee.model.inventoryData;
 import com.increff.employee.model.inventoryForm;
+import com.increff.employee.model.productData;
 import com.increff.employee.pojo.inventoryPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.InventoryService;
@@ -25,57 +28,34 @@ public class inventoryApiController {
 	private Logger logger = Logger.getLogger(inventoryApiController.class);
 
 	@Autowired
-	private InventoryService service;
+	private inventoryDto idt;
 
 	@ApiOperation(value = "Adds an product")
 	@RequestMapping(path = "/api/inventory", method = RequestMethod.POST)
 	public void add(@RequestBody inventoryForm form) throws ApiException {
-		inventoryPojo p = convert(form);
-		service.add(p);
+		idt.add(form);
 	}
+	
 
-	
-	
 
 	@ApiOperation(value = "Gets an inventory by ID")
 	@RequestMapping(path = "/api/inventory/{id}", method = RequestMethod.GET)
-	public inventoryForm get(@PathVariable int id) throws ApiException {
-		inventoryPojo p = service.get(id);
-		return convert(p);
+	public inventoryData get(@PathVariable int id) throws ApiException {
+		return idt.get(id);
 	}
 
 	@ApiOperation(value = "Gets list of all inventorys")
 	@RequestMapping(path = "/api/inventory", method = RequestMethod.GET)
-	public List<inventoryForm> getAll() throws Exception {
-		List<inventoryPojo> list = service.getAll();
-		List<inventoryForm> list2 = new ArrayList<inventoryForm>();
-		for (inventoryPojo p : list) {
-			logger.info(p.getId());
-			list2.add(convert(p));
-		}
-		return list2;
+	public List<inventoryData> getAll() throws Exception {
+
+		return idt.getAll();
 	}
 
 	@ApiOperation(value = "Updates an inventory")
 	@RequestMapping(path = "/api/inventory/{id}", method = RequestMethod.PUT)
 	public void update(@PathVariable int id, @RequestBody inventoryForm f) throws ApiException {
-		inventoryPojo p = convert(f);
-		service.update(id, p);
-	}
-	
-
-	private static inventoryForm convert(inventoryPojo p) {
 		
-		inventoryForm d = new inventoryForm();
-		d.setQuantity(p.getQuantity());
-		d.setId(p.getId());
-		return d;
-	}
-
-	private static inventoryPojo convert(inventoryForm f) {
-		inventoryPojo pr = new inventoryPojo();
-		pr.setQuantity(f.getQuantity());
-		pr.setId(f.getId());
-		return pr;
+	     idt.update(id, f);
 	}
 }
+	
